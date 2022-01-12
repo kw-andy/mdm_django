@@ -1,3 +1,4 @@
+from django.db import models
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
@@ -30,3 +31,17 @@ def index(request):
 
     return render(request,'index.html', context=context)
 
+class BookListView(generic.ListView):
+    model = Book
+    #queryset = Book.objects.filter(title__icontains='vent')[:5]
+    paginate_by = 5
+
+class BookDetailView(generic.DetailView):
+    model = Book    
+    paginate_by = 5
+
+class AuthorListView(generic.ListView):
+    model = Author
+
+class AuthorDetailView(generic.DetailView):
+    model = Author        
